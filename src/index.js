@@ -1,4 +1,4 @@
-const {Flint, Adapter} = require('./gun-flint');
+const {Flint, Adapter} = require('gun-flint');
 const MongoClient = require('mongodb');
 
 Flint.register(new Adapter({
@@ -30,7 +30,16 @@ Flint.register(new Adapter({
             if (!this.ready) {
                 this.putTimeout = setTimeout(put, 500);
             } else {
-                this.db.insertOne({key, val: JSON.stringify(val)}, done);
+                this.get(key, (err, result) => {
+                    if (err && err.code() === 500) {
+                        done(this.errors.internal);
+                    } else if (result) {
+                        this.db.findOneAndUpdate({key}, {val: JSON.stringify(val)}, done);
+                    } else {
+                        this.db.insertOne({key, val: JSON.stringify(val)}, done);
+                    }
+                })
+                
             }
         }
     },
