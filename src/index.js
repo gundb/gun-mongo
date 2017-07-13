@@ -30,16 +30,7 @@ Flint.register(new Adapter({
             if (!this.ready) {
                 this.putTimeout = setTimeout(put, 500);
             } else {
-                this.get(key, (err, result) => {
-                    if (err && err.code() === 500) {
-                        done(this.errors.internal);
-                    } else if (result) {
-                        this.db.findOneAndUpdate({key}, {val: JSON.stringify(val)}, done);
-                    } else {
-                        this.db.insertOne({key, val: JSON.stringify(val)}, done);
-                    }
-                })
-                
+                this.db.findOneAndUpdate({key}, {key, val: JSON.stringify(val)}, {upsert: true}, done);
             }
         }
     },
