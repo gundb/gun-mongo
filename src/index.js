@@ -1,4 +1,4 @@
-const {Flint, NodeAdapter} = require('./../../gun-flint');
+const {Flint, NodeAdapter} = require('gun-flint');
 const MongoClient = require('mongodb');
 
 Flint.register(new NodeAdapter({
@@ -35,7 +35,7 @@ Flint.register(new NodeAdapter({
             }
         }
     },
-    opt: function(context, opt, done) {
+    opt: function(context, opt) {
         let {mongo} = opt;
         if (mongo) {
             this.initialized = true;
