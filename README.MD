@@ -41,3 +41,9 @@ const gun = new Gun({
 # Performance
 
 In some preliminary tests (that should not be taken for official benchmarks), `gun-mongo` can write ~2,600 nodes/sec, where each node had 10 key:value pairs. Read stats pending.
+
+# Issues & Contributing
+
+Issues welcome on [Github](https://github.com/sjones6/gun-mongo/issues).
+
+Community contributions welcome. PRs accepted after code review.
