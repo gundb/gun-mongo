@@ -1,42 +1,26 @@
-const {Flint, NodeAdapter} = require('gun-flint');
-const MongoClient = require('mongodb');
+const Flint = require('gun-flint');
+const NodeAdapter = Flint.NodeAdapter;
+const Mongojs = require('mongojs');
 
 Flint.register(new NodeAdapter({
-    getTimeout: null,
-    putTimeout: null,
-    patchTimeout: null,
-    ready: false,
+
+    /**
+     * @type {boolean}  Whether or not the adapter has been properly initialized and can attempt DB connections
+     */
     initialized: false,
-    get: function(key, done) {
-        if (this.initialized) {
-            let get = this.get.bind(this, key, done);
-            if (!this.ready) {
-                this.getTimeout = setTimeout(get, 500);
-            } else {
-                this.db.findOne({key}, (err, result) => {
-                    if (err) {
-                        done(this.errors.internal)
-                    } else if (!result) {
-                        done(this.errors.lost);
-                    } else {
-                        done(null, result.val);
-                    }
-                });
-            }
-        }
-    },
-    put: function(key, val, done) {
-        if (this.initialized) {
-            let put = this.put.bind(this, key, val, done);
-            if (!this.ready) {
-                this.putTimeout = setTimeout(put, 500);
-            } else {
-                this.db.findOneAndUpdate({key}, {key, val}, {upsert: true}, done);
-            }
-        }
-    },
+
+    /**
+     * Handle Initialization options passed during Gun initialization of <code>opt</code> calls.
+     * 
+     * Prepare the adapter to create a connection to the Mongo server
+     * 
+     * @param {object}  context    The full Gun context during initialization/opt call
+     * @param {object}  opt        Options pulled from fully context
+     * 
+     * @return {void}
+     */
     opt: function(context, opt) {
-        let {mongo} = opt;
+        let mongo = opt.mongo || null;
         if (mongo) {
             this.initialized = true;
             let database = mongo.database || 'gun';
@@ -44,17 +28,64 @@ Flint.register(new NodeAdapter({
             let host = mongo.host || 'localhost';
             let query = mongo.query ? '?' + mongo.query : '';
             this.collection = mongo.collection || 'gun-mongo';
-            
-            let _self = this;
-            MongoClient.connect(`mongodb://${host}:${port}/${database}${query}`, (err, db) => {
-                if (err) {
-                    throw err;
-                }
-                _self.ready = true;
-                _self.db = db.collection(_self.collection);
-            });
+            this.db = Mongojs(`mongodb://${host}:${port}/${database}${query}`);
         } else {
             this.initialized = false
         }
+    },
+
+    /**
+     * Retrieve results from the DB
+     * 
+     * @param {string}   key    The key for the node to retrieve
+     * @param {function} done   Call after retrieval (or error)
+     *
+     * @return {void}
+     */
+    get: function(key, done) {
+        if (this.initialized) {
+            this.getCollection().find({_id: key}, {}, (err, result) => {
+                if (err) {
+                    done(this.errors.internal)
+                } else if (!result || !result.length) {
+                    done(this.errors.lost);
+                } else {
+                    done(null, result[0].val);
+                }
+            });
+        }
+    },
+
+    /**
+     * Write nodes to the DB
+     * 
+     * @param {string}   key   The key for the node
+     * @param {object}   node  The full node with metadata
+     * @param {function} done  Called when the node has been written
+     * 
+     * @return {void}
+     */
+    put: function(key, node, done) {
+        if (this.initialized) {
+            this.getCollection(key).findAndModify(
+                {
+                    query: {_id: key},
+                    update: { 
+                        key: key,
+                        val: node
+                    },
+                    upsert: true
+                }, done
+            );
+        }
+    },
+
+    /**
+     * Retrieve the collection for querying
+     * 
+     * @return {object}   A collection to query
+     */
+    getCollection: function() {
+        return this.db.collection(this.collection);
     }
 }));
