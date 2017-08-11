@@ -1,0 +1,23 @@
+language: node_js
+deploy:
+  provider: npm
+  email: jones.spencera@gmail.com
+  language: node_js
+  api_key:
+    secure: DgpT+gUwL7Pt7MbvxaAMlZStgLyItI3PtupdXQQf80OCR75P8Sy9Lz18TPd7P6f7j1NS3u/Xp+uZz+ycTeCNbvX3pcTWp/jnlbET7MPXk8sZ+L0pyi682xLRLvh3LaXEwxdxqkABRYuCiSCYBLqWKo44B/h1Se7pnIMR0zkTUg5D2g2yD+hL5uK1Fd0rbghDBg38zWqGDKOEnfluAaLAA/w5cvJY/OxBdUjP1oTD9WfPPsLEyBpYDKIipxYziZiojkdcBiBDrNHQWK4SL0ABCYDdiSL/9ZbgEeMvhx/ohOo6QFKy22JkwFF7jNghUvtm8BJP0YVY+TMpd8Wf4LWbbxfTfrjIV23iE6ZeGX1LoZqwgAEo4CxYYZ6xgD3qdELeorJ214mqZK2KEsCy5wLWQNjdS9f/JrSE13/XJtrtqql+/Yv2yQh0sieTOmcLGCyESyNi+PBdqHxAw+Mk5V2lu32bqVRiqzNZtGnIb80togfIy2ZKZZ283v1DnqhEvd1OSC6MBeSYdNM5S2WAELWFG0c5+1YF0rAikIRi2m5VLCg30z/F7pG2oKxNGzeHCidYU52bGb2/ZA3yCdrCI4jDRCW9GzXKuCMgayeqw8zJu7VU26A3j5cZeCOwvp6uSB76cseHU+ZlYqV+3x+s162zeWVc+NhkO7/xFxEqYUyVV9c=
+  on:
+    branch: master
+    tags: true
+    repo: sjones6/gun-mongo
+node_js:
+- 8
+- 7
+- 6
+services:
+  - mongodb
+before_script:
+  - sleep 15
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  - mongo use flint_integration_tests
+script:
+- npm test

@@ -8,8 +8,10 @@ A MongoDB adapter for GunJS.
 
 If the following are true, then `gun-mongo` could be right for you:
 
-1. No single node is huge (e.g., a `users` node with millions of children would be problematic). Most nodes are small to medium.
+1. No single node is huge (e.g., a `users` node with millions of children would be problematic). Most nodes are small to medium. Fair warning: If a node grows too large, it _could_ overwhelm memory and cause crashes.
 2. Nodes are created more than updated.
+
+Contrast this with [`gun-mongo-key`](https://github.com/sjones6/gun-mongo-key). Whereas `gun-mongo-key` has the advantage for updates and enabling streaming of large nodes, `gun-mongo` makes Node creation much more efficient.
 
 # Installation
 
