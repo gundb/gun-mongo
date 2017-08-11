@@ -1,6 +1,6 @@
 # Gun-Mongo
 
-A MongoDB adapter for GunJS.s
+A MongoDB adapter for GunJS.ss
 
 # Some Considerations
 
