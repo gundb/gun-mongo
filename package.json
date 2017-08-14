@@ -16,7 +16,8 @@
   "author": "sjones6",
   "license": "MIT",
   "scripts": {
-    "test": "flint test ./src/gun-mongo.js --opt=./flint-opt.js"
+    "test": "flint test ./src/gun-mongo.js --opt=./flint-opt.js",
+    "profile": "flint profile ./src/gun-mongo.js --opt=./flint-opt.js"
   },
   "bugs": {
     "url": "https://github.com/sjones6/gun-mongo/issues"

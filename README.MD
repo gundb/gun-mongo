@@ -42,7 +42,21 @@ const gun = new Gun({
 
 # Performance
 
-In some preliminary tests (that should not be taken for official benchmarks), `gun-mongo` can write ~2,600 nodes/sec, where each node had 10 key:value pairs. Read stats pending.
+Tests run on a 2012 Macbook Pro, 2.5 GHz Intel Core i5, 16 GB RAM.
+
+**On an empty collection:**
+
+* Write 10000 nodes: : 7188ms; 7.188s; 0.7188 ms/node.
+* Read 10000 nodes: : 4383ms; 4.383s; 0.4383 ms/node.
+* Update 10000 nodes: : 8077ms; 8.077s; 0.8077 ms/node.
+* Update single field on 10000 nodes: : 7661ms; 7.661s; 0.7661 ms/node.
+
+On a collection with ~1.4 million documents:
+
+* Write 10000 nodes: : 9764ms; 9.764s; 0.9764 ms/node.
+* Read 10000 nodes: : 4579ms; 4.579s; 0.4579 ms/node.
+* Update 10000 nodes: : 8599ms; 8.599s; 0.8599 ms/node.
+* Update single field on 10000 nodes: : 8486ms; 8.486s; 0.8486 ms/node.
 
 # Issues & Contributing
 

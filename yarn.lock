@@ -96,8 +96,8 @@ growl@1.9.2:
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.9.2.tgz#0ea7743715db8d8de2c5ede1775e1b45ac85c02f"
 
 gun-flint@^0.0:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/gun-flint/-/gun-flint-0.0.18.tgz#2f575f553d7600facb271b976c63de49e864500d"
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/gun-flint/-/gun-flint-0.0.21.tgz#60bd8e3514ab0506cf08680bfd9a25d836ddb628"
   dependencies:
     babel-runtime "^6.11.6"
     minimist "^1.2.0"

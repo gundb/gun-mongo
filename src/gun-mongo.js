@@ -28,6 +28,8 @@ module.exports = new NodeAdapter({
             let query = mongo.query ? '?' + mongo.query : '';
             this.collection = mongo.collection || 'gun-mongo';
             this.db = Mongojs(`mongodb://${host}:${port}/${database}${query}`);
+
+            this.indexInBackground = mongo.indexInBackground || false;
         } else {
             this.initialized = false
         }
@@ -43,13 +45,13 @@ module.exports = new NodeAdapter({
      */
     get: function(key, done) {
         if (this.initialized) {
-            this.getCollection().find({_id: key}, {}, (err, result) => {
+            this.getCollection().findOne({_id: key}, {}, (err, result) => {
                 if (err) {
                     done(this.errors.internal)
-                } else if (!result || !result.length) {
+                } else if (!result) {
                     done(this.errors.lost);
                 } else {
-                    done(null, result[0].val);
+                    done(null, result.val);
                 }
             });
         }
@@ -86,5 +88,18 @@ module.exports = new NodeAdapter({
      */
     getCollection: function() {
         return this.db.collection(this.collection);
-    }
+    },
+
+    /**
+     * Ensure indexes are created on the proper fields
+     * 
+     * @return {void}
+     */
+    _ensureIndex() {
+        this._getCollection().createIndex({
+            _id: 1,
+        }, {
+            background: this.indexInBackground
+        });
+   }
 });

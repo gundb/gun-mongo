@@ -1,7 +1,7 @@
 module.exports = {
     file: false,
     mongo: {
-        database: 'flint_integration_tests',
-        collection: 'test_collection'
+        database: 'flint_perf_clean',
+        collection: 'mongo_node_adapter'
     }
 }
