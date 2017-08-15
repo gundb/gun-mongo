@@ -51,7 +51,7 @@ Tests run on a 2012 Macbook Pro, 2.5 GHz Intel Core i5, 16 GB RAM.
 * Update 10000 nodes: : 8077ms; 8.077s; 0.8077 ms/node.
 * Update single field on 10000 nodes: : 7661ms; 7.661s; 0.7661 ms/node.
 
-On a collection with ~1.4 million documents:
+**On a collection with ~1.4 million documents:**
 
 * Write 10000 nodes: : 9764ms; 9.764s; 0.9764 ms/node.
 * Read 10000 nodes: : 4579ms; 4.579s; 0.4579 ms/node.
