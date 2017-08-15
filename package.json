@@ -1,6 +1,6 @@
 {
   "name": "gun-mongo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An Mongo adapter for Gunjs",
   "main": "src/index.js",
   "repository": {
