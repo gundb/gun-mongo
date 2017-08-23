@@ -3,11 +3,11 @@
 
 
 babel-runtime@^6.11.6:
-  version "6.25.0"
-  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.25.0.tgz#33b98eaa5d482bb01a8d1aa6b437ad2b01aec41c"
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
     core-js "^2.4.0"
-    regenerator-runtime "^0.10.0"
+    regenerator-runtime "^0.11.0"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -96,8 +96,8 @@ growl@1.9.2:
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.9.2.tgz#0ea7743715db8d8de2c5ede1775e1b45ac85c02f"
 
 gun-flint@^0.0:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/gun-flint/-/gun-flint-0.0.21.tgz#60bd8e3514ab0506cf08680bfd9a25d836ddb628"
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/gun-flint/-/gun-flint-0.0.24.tgz#0eb73432b04f3e1ca3078e5fe43251a4dcdca97a"
   dependencies:
     babel-runtime "^6.11.6"
     minimist "^1.2.0"
@@ -283,9 +283,9 @@ readable-stream@^2.0.2:
     string_decoder "~1.0.3"
     util-deprecate "~1.0.1"
 
-regenerator-runtime@^0.10.0:
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
+regenerator-runtime@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
 
 require_optional@~1.0.0:
   version "1.0.1"

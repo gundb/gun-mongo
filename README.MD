@@ -44,19 +44,17 @@ const gun = new Gun({
 
 Tests run on a 2012 Macbook Pro, 2.5 GHz Intel Core i5, 16 GB RAM.
 
-**On an empty collection:**
+**Small Nodes: 10 Properties Each**
+* Write 10000 nodes: 14960ms; 14.96s; **1.496 ms/node**
+* Read 10000 nodes: 7159ms; 7.159s; **0.716 ms/node**
+* Full Update 10000 nodes: 24272ms; 24.272s; **2.427 ms/node**
+* Update single field on 10000 nodes: 26881ms; 26.881s; **2.688 ms/node**
 
-* Write 10000 nodes: : 7188ms; 7.188s; 0.7188 ms/node.
-* Read 10000 nodes: : 4383ms; 4.383s; 0.4383 ms/node.
-* Update 10000 nodes: : 8077ms; 8.077s; 0.8077 ms/node.
-* Update single field on 10000 nodes: : 7661ms; 7.661s; 0.7661 ms/node.
-
-**On a collection with ~1.4 million documents:**
-
-* Write 10000 nodes: : 9764ms; 9.764s; 0.9764 ms/node.
-* Read 10000 nodes: : 4579ms; 4.579s; 0.4579 ms/node.
-* Update 10000 nodes: : 8599ms; 8.599s; 0.8599 ms/node.
-* Update single field on 10000 nodes: : 8486ms; 8.486s; 0.8486 ms/node.
+**Medium Nodes: 1000 Properties Each**
+* Write 1000 nodes: 17427ms; 17.427s; **17.410 ms/node**
+* Read 1000 nodes: 12255ms; 12.255s; **12.243 ms/node**
+* Full Update 1000 nodes: 27271ms; 27.271s; **27.244 ms/node**
+* Update single field on 1000 nodes: 13280ms; 13.28s; **13.267 ms/node**
 
 # Issues & Contributing
 
