@@ -33,6 +33,8 @@ const gun = new Gun({
     mongo: {
         host: 'localhost',
         port: '27017',
+        username: null,
+        password: null,
         database: 'gun',
         collection: 'gun-mongo',
         query: ''
