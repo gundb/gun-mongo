@@ -25,10 +25,16 @@ module.exports = new NodeAdapter({
             let database = mongo.database || 'gun';
             let port = mongo.port || '27017';
             let host = mongo.host || 'localhost';
+            let userUri = mongo.username || '';
+            if (userUri.length > 0) {
+                if (mongo.password) {
+                    userUri += `:${mongo.password}`;
+                }
+                userUri += '@';
+            }
             let query = mongo.query ? '?' + mongo.query : '';
             this.collection = mongo.collection || 'gun-mongo';
-            this.db = Mongojs(`mongodb://${host}:${port}/${database}${query}`);
-
+            this.db = Mongojs(`mongodb://${userUri}${host}:${port}/${database}${query}`);
             this.indexInBackground = mongo.indexInBackground || false;
         } else {
             this.initialized = false
