@@ -39,7 +39,7 @@ module.exports = new NodeAdapter({
                 let query = mongo.query ? '?' + mongo.query : '';
                 this.collection = mongo.collection || 'gun-mongo';
                 this.indexInBackground = mongo.indexInBackground || false;
-                let dbString = `mongodb://${userUri}${host}:${port}/${database}${query}`;
+                dbString = `mongodb://${userUri}${host}:${port}/${database}${query}`;
             }
             this.db = Mongojs(dbString);
         } else {
