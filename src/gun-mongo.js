@@ -25,6 +25,8 @@ module.exports = new NodeAdapter({
             let dbString;
             if (typeof obj === "string") {
                 dbString = mongo;
+                this.indexInBackground = opt.indexInBackground || false;
+                this.collection = opt.collection || "gun";
             } else {
                 let database = mongo.database || 'gun';
                 let port = mongo.port || '27017';
