@@ -22,14 +22,26 @@ module.exports = new NodeAdapter({
         let mongo = opt.mongo || null;
         if (mongo) {
             this.initialized = true;
-            let database = mongo.database || 'gun';
-            let port = mongo.port || '27017';
-            let host = mongo.host || 'localhost';
-            let query = mongo.query ? '?' + mongo.query : '';
-            this.collection = mongo.collection || 'gun-mongo';
-            this.db = Mongojs(`mongodb://${host}:${port}/${database}${query}`);
-
-            this.indexInBackground = mongo.indexInBackground || false;
+            let dbString;
+            if (typeof obj === "string") {
+                dbString = mongo;
+            } else {
+                let database = mongo.database || 'gun';
+                let port = mongo.port || '27017';
+                let host = mongo.host || 'localhost';
+                let userUri = mongo.username || '';
+                if (userUri.length > 0) {
+                    if (mongo.password) {
+                        userUri += `:${mongo.password}`;
+                    }
+                    userUri += '@';
+                }
+                let query = mongo.query ? '?' + mongo.query : '';
+                this.collection = mongo.collection || 'gun-mongo';
+                this.indexInBackground = mongo.indexInBackground || false;
+                dbString = `mongodb://${userUri}${host}:${port}/${database}${query}`;
+            }
+            this.db = Mongojs(dbString);
         } else {
             this.initialized = false
         }

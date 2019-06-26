@@ -33,10 +33,14 @@ const gun = new Gun({
     mongo: {
         host: 'localhost',
         port: '27017',
+        username: null,
+        password: null,
         database: 'gun',
         collection: 'gun-mongo',
         query: ''
-    }
+    },
+    //Instead of using an object (like above), you may also provide the MongoDB connection URI yourself:
+    mongo: "mongodb://127.0.0.1/gun"
 });
 ```
 
